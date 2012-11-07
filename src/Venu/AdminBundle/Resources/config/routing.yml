@@ -8,7 +8,7 @@ VenuAdminBundle_blog_edit:
     pattern:  /blog/edit/{id}
     defaults: { _controller: VenuAdminBundle:Blog:edit }
     requirements:
-        _method:  GET
+        _method:  GET|POST
         id: \d+
 
 VenuAdminBundle_blog_delete:
@@ -23,3 +23,17 @@ VenuAdminBundle_blog_create:
     defaults: { _controller: VenuAdminBundle:Blog:create }
     requirements:
         _method: GET|POST
+
+VenuAdminBundle_blog_comments:
+    pattern:  /comment/{id}
+    defaults: { _controller: VenuAdminBundle:Comment:show }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+
+VenuAdminBundle_comment_delete:
+    pattern:  /comment/delete/{id}/{blogId}
+    defaults: { _controller: VenuAdminBundle:Comment:delete }
+    requirements:
+        _method:  GET
+        id: \d+

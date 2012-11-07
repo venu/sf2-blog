@@ -42,7 +42,9 @@ class CommentController extends Controller
                        ->getEntityManager();
             $em->persist($comment);
             $em->flush();
-                
+            
+             $this->get('session')->setFlash('blogger-notice', 'Successfully created!');
+             
             return $this->redirect($this->generateUrl('VenuBlogBundle_blog_show', array(
                 'id'    => $comment->getBlog()->getId(),
                 'slug'  => $comment->getBlog()->getSlug())) .

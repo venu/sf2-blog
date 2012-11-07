@@ -1,0 +1,62 @@
+{% extends 'VenuAdminBundle::base.html.twig' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+
+
+{% block body %}
+    <div class="modal hide fade" id="myModal">
+        <div class="modal-header">
+            <button type="button" class="close orderRejectCloseButton">×</button>
+            <h3>Delete Blog Post</h3>
+        </div>
+        <div class="modal-body">
+            <p>If you continue, this post won´t be available to the user anymore.</p>
+        </div>
+        <div class="modal-footer">
+            <a class="btn orderRejectCloseButton">Close</a>
+            <a id="orderRejectContinue" class="btn btn-primary">Continue</a>
+        </div>
+    </div>        
+
+    <article class="blog">
+        <header>
+            <h2>{{ blog.title }}</h2>
+        </header>
+    </article>
+    
+    <section class="comments" id="comments">
+        <section class="previous-comments">
+            <h6>Comments</h6>
+            {% include 'VenuAdminBundle:Comment:index.html.twig' with { 'comments': comments } %}
+        </section>
+    </section>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+    $('.btn-danger').live('click', function() { 
+        $('#myModal').modal({
+            toggle: true,
+            backdrop: 'static'
+        });
+        
+        var deleteURl = $(this).closest('a').data('deleteurl');
+
+        $('a#orderRejectContinue').bind('click', function() {
+            $(this).unbind('click');
+            $('.orderRejectCloseButton').unbind('click');
+            
+            window.location.href = deleteURl;
+        }); 
+
+        $('.orderRejectCloseButton').bind('click', function() {
+            $(this).unbind('click');
+            $('#orderRejectContinue').unbind('click');
+            $('#myModal').modal('hide');
+        });    
+            
+    });
+  </script>
+{% endblock %}

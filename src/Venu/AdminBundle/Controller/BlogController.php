@@ -25,6 +25,8 @@ class BlogController extends Controller
                            ->getEntityManager();
                 $em->persist($blog);
                 $em->flush();
+                
+                 $this->get('session')->setFlash('blogger-notice', 'Successfully created!');
 
                 return $this->redirect($this->generateUrl('VenuAdminBundle_homepage'));
             }
@@ -51,19 +53,25 @@ class BlogController extends Controller
         $form = $this->createForm(new BlogType(), $blog);
         
         if ($this->getRequest()->getMethod() == 'POST') {
-            $blog->setAuthor($this->get('security.context')->getToken()->getUser());
             $form->bindRequest($this->getRequest());
 
             if ($form->isValid()) {
+                $blog->setAuthor($this->get('security.context')->getToken()->getUser());
                 $em = $this->getDoctrine()
                            ->getEntityManager();
+                
+                //\Doctrine\Common\Util\Debug::dump($blog);
+                //        exit;
                 $em->persist($blog);
                 $em->flush();
+                
+                 $this->get('session')->setFlash('blogger-notice', 'Successfully edited!');
 
-                return $this->redirect($this->generateUrl('VenuBlogBundle_blog_show', array(
-                    'id'    => $blog->getId(),
-                    'slug'  => $blog->getSlug()))
-                );
+//                return $this->redirect($this->generateUrl('VenuBlogBundle_blog_show', array(
+//                    'id'    => $blog->getId(),
+//                    'slug'  => $blog->getSlug()))
+//                );
+                return $this->redirect($this->generateUrl('VenuAdminBundle_homepage'));
             }
             
         }
@@ -86,6 +94,8 @@ class BlogController extends Controller
         
         $em->remove($blog);
         $em->flush();
+        
+         $this->get('session')->setFlash('blogger-notice', 'Successfully deleted!');
         
         return $this->redirect($this->generateUrl('VenuAdminBundle_homepage') );
     }

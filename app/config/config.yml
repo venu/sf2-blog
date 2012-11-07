@@ -28,7 +28,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ VenuApiBundle, VenuBlogBundle]
+    bundles:        [ VenuApiBundle, VenuBlogBundle, VenuAdminBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

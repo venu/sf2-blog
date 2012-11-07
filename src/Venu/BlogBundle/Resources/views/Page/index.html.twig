@@ -9,7 +9,7 @@
             </header>
 
             <div class="snippet">
-                <p>{{ blog.blog(500) }}</p>
+                <p>{{ blog.blog(500) | striptags('<p>,<br>,<strong>,<u>,<i>, <style>, <em>') | raw }}</p>
                 <p class="continue"><a href="{{ path('VenuBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">Continue reading...</a></p>
             </div>
 

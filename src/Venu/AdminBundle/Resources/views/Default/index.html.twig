@@ -37,7 +37,7 @@
         <td><a href="{{ path('VenuBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}</a></td>
         <td>{{ blog.slug }}</td>
         <td>{{ blog.createdAt|date('l, F j, Y') }}</td>
-        <td>{{ blog.comments|length}}</td>
+        <td><a href="{{ path('VenuAdminBundle_blog_comments', { 'id': blog.id}) }}" class="btn"><i class="icon-edit"></i> {{ blog.comments|length}}</a></td>
         <td><a href="{{ path('VenuAdminBundle_blog_edit', { 'id': blog.id}) }}" class="btn"><i class="icon-edit"></i> Edit</a></td>
         <td><a class="btn btn-danger btn-mini"><i class="icon-trash icon-white"></i></a></td>
         {% else %}

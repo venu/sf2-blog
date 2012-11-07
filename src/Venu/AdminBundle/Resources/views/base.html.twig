@@ -13,6 +13,15 @@
         padding-bottom: 40px;
       }
     </style>
+    {% block stylesheets %}
+        {% stylesheets 
+            '@VenuBlogBundle/Resources/public/css/*'
+            output='css/blogger.css'
+            filter='?yui_css'
+        %}
+         <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+        {% endstylesheets %}
+    {% endblock %}
     <link href="{{ asset('css/bootstrap-responsive.css') }}" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -38,13 +47,30 @@
               <div class="nav-collapse">
                 <ul class="nav">
                   <li class="active"><a href="{{ path('VenuBlogBundle_homepage') }}">Home</a></li>
-                  <li class="active"><a href="{{ path('VenuBlogBundle_about') }}">Login</a></li>
-                  <li class="active"><a href="{{ path('VenuBlogBundle_about') }}">Logout</a></li>
+                  <li class="active"><a href="{{ path('VenuAdminBundle_blog_create') }}">Create Order</a></li>
                 </ul>
+                
+                        <ul class="nav pull-right">
+                      <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                {% endif %}</li>
+                    </ul>
+                      
               </div><!--/.nav-collapse -->
             </div>
           </div>
     </div>
+          
+    {% if app.session.hasFlash('blogger-notice') %}
+        <div class="blogger-notice">
+            {{ app.session.flash('blogger-notice') }}
+        </div>
+    {% endif %} 
 
     <div class="container">
         {% block body %}{% endblock %}

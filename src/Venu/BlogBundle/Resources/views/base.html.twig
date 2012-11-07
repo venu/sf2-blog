@@ -68,6 +68,12 @@
             </div>
           </div>
     </div>
+          
+    {% if app.session.hasFlash('blogger-notice') %}
+        <div class="blogger-notice">
+            {{ app.session.flash('blogger-notice') }}
+        </div>
+    {% endif %}
 
     <div class="container">
         <div>

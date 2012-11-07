@@ -9,7 +9,7 @@
             <h2>{{ blog.title }}</h2>
         </header>
         <div>
-            <p>{{ blog.blog }}</p>
+            <p>{{ blog.blog | striptags('<p>,<br>,<strong>,<u>,<i>, <style>, <em>') | raw}}</p>
         </div>
     </article>
     

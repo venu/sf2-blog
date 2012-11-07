@@ -2,8 +2,13 @@
 
 {% block body %}
 <div class="page-header">
-        <h1>Create Post</h1>
-    </div>
+    <h1>Create Post</h1>
+</div>
+
+<div>
+{{ form_errors(form) }}
+</div>
+
 <form action="{{ path('VenuAdminBundle_blog_create') }}" method="post" {{ form_enctype(form) }} class="blogger">
     {{ form_widget(form) }}
     <p>
@@ -13,6 +18,5 @@
 {% endblock %}
 
 {% block javascript %}
-<script>{{ tinymce_init() }}</script>
-{% endblock %}
+{{ tinymce_init() }}{% endblock %}
    

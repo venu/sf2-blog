@@ -1,0 +1,12 @@
+{% for comment in comments %}
+    <article class="comment {{ cycle(['odd', 'even'], loop.index0) }}" id="comment-{{ comment.id }}">
+        <header>
+            <p><span class="highlight">{{ comment.user }}</span> commented <time datetime="{{ comment.createdAt|date('c') }}">{{ comment.createdAt|created_ago }}</time></p>
+        </header>
+        <p>{{ comment.comment }}</p>
+        <p>
+        <a class="btn btn-danger btn-mini" data-deleteurl="{{ path('VenuAdminBundle_comment_delete', { 'id': comment.id, 'blogId': blog.id}) }}"><i class="icon-trash icon-white"></i>Delete</a></p>
+    </article>
+{% else %}
+    <p>There are no comments for this post. Be the first to comment...</p>
+{% endfor %}
