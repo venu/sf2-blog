@@ -1,5 +1,2 @@
 services:
-    venu_blog.twig.extension:
-        class: Venu\BlogBundle\Twig\Extensions\VenuBlogExtension
-        tags:
-            - { name: twig.extension }
+    

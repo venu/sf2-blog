@@ -1,3 +1,4 @@
+#venu bundles
 venu_admin:
     resource: "@VenuAdminBundle/Controller/"
     type:     annotation
@@ -11,38 +12,11 @@ venu_blog:
 VenuBlogBundle:
     resource: "@VenuBlogBundle/Resources/config/routing.yml"
     prefix:   /
-
-
-
-# Internal routing configuration to handle ESI
-#_internal:
-#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#   prefix:   /_internal
-
-fos_user_security:
-    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-
-#fos_user_profile:
-#    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-#    prefix: /profile
-
-fos_user_register:
-    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /register
-
-fos_user_resetting:
-    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /resetting
-
-#fos_user_change_password:
-#    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-#    prefix: /change-password
-
+    
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
-
-
+    
 pictureplix_api_public:
     resource: Venu\ApiBundle\Controller\SecurityController
     type: rest
@@ -53,10 +27,23 @@ pictureplix_api:
     prefix: /api
     
     
-fos_user_registration_confirm:
-    pattern:   /order/verifyEmail/{token}
-    defaults:  { _controller: PpApiBundle:Security:postEmailverify }
     
-fos_user_resetting_reset:
-    pattern:   /order/resetPassword
-    defaults:  { _controller: PpApiBundle:Security:postPublicUserForgotpassword }
+#fos user bundle
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile

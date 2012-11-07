@@ -11,34 +11,13 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: %kernel.debug%
     form:            true
-    csrf_protection: false
+    csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
     default_locale:  %locale%
     trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         ~
-    session:
-        handler_id:     session.handler.pdo
-        
-parameters:
-   pdo.db_options:
-        db_table:    session
-        db_id_col:   session_id
-        db_data_col: session_value
-        db_time_col: session_time
-
-services:
-    pdo:
-        class: PDO
-        arguments:
-            - "mysql:dbname=%database_name%"
-            - %database_user%
-            - %database_password%
-            
-    session.handler.pdo:
-        class:     'Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler'
-        arguments: [@pdo, %pdo.db_options%]
-     
+         
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
@@ -110,23 +89,9 @@ jms_aop:
 
 fos_user:
     db_driver: orm
-    firewall_name: wsse_secured #fos_secured
+    firewall_name: fos_secured
     user_class: Venu\ApiBundle\Entity\User
-    service:
-        mailer: fos_user.mailer.twig_swift
-    from_email:
-            address:        noreply@riktam.de
-            sender_name:    Riktam
-    registration:
-        form:
-            type: venu_api_registration
-        confirmation: 
-            enabled: true
-            template: VenuApiBundle:Register:email.html.twig
-    resetting:
-        email:
-            template: VenuApiBundle:Resetting:email.html.twig
-        
+    
 fos_rest:
     view:
         view_response_listener: true

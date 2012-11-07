@@ -52,12 +52,28 @@
                   <li class="active"><a href="{{ path('VenuBlogBundle_homepage') }}">Home</a></li>
                   <li class="active"><a href="{{ path('VenuBlogBundle_about') }}">About us</a></li>
                 </ul>
+               
+                   <ul class="nav pull-right">
+                      <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                {% endif %}</li>
+                    </ul>
+                 
               </div><!--/.nav-collapse -->
             </div>
           </div>
     </div>
 
     <div class="container">
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
         {% block body %}{% endblock %}
         <footer>
             <p>&copy; Riktam Blog 2012</p>

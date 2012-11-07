@@ -1,0 +1,30 @@
+<section id="content" class="loginbox">
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request" onsubmit="return formSubmit();">
+<p>
+    <label for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
+    <input type="text" class="text" id="username" name="username" />
+</p>
+
+<p class="formend">
+	<input class="submit" type="submit" id="_submit" name="_submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+	
+</p>
+    <div id="error">
+        {% if invalid_username is defined %}
+            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+        {% endif %}
+    </div>
+    
+</form>
+</section>
+{% block javascripts %}
+<script>
+function formSubmit(){
+	if($('#username').val() == ''){
+	  $('#error p').empty();
+	  $('#error p').text('Invalid Username or Email Id');
+	  return false;
+	}
+}
+</script>
+{% endblock %}

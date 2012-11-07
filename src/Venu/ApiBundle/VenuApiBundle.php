@@ -6,10 +6,10 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class VenuApiBundle extends Bundle
 {
-	public function getParent()
-	{
-		return "FOSUserBundle";
-	}
+//	public function getParent()
+//	{
+//		return "FOSUserBundle";
+//	}
         
         /*
          * Doctrine - MYSQL - ENUM fix

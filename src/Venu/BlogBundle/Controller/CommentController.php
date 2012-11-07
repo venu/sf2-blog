@@ -27,10 +27,12 @@ class CommentController extends Controller
 
     public function createAction($blog_id)
     {
+        $user = $this->get('security.context')->getToken()->getUser();
         $blog = $this->getBlog($blog_id);
 
         $comment  = new Comment();
         $comment->setBlog($blog);
+        $comment->setUser($user);
         $request = $this->getRequest();
         $form    = $this->createForm(new CommentType(), $comment);
         $form->bindRequest($request);

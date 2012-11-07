@@ -1,0 +1,33 @@
+{% extends 'VenuBlogBundle::base.html.twig' %}
+
+{% block fos_user_content %}
+
+
+<section id="content" class="loginbox">
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+<p>
+    <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+    <input type="text" class="text" id="username" name="_username" value="{{ last_username }}" />
+</p>
+<p>
+    <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+    <input type="password" class="text" id="password" name="_password" />
+</p>
+<p class="formend">
+	<input class="submit" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+	
+    <input type="checkbox" style="position:relative;top:3px;" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+	<br/><br/>
+	<a href="{{ url('fos_user_resetting_request') }}">forget password &raquo;</a>
+	<br/>
+	<a href="{{ path('fos_user_registration_register') }}">Register &raquo;</a>
+{% if error %}
+    <div>Invalid Username/Password</div>
+{% endif %}
+    
+</p>
+</form>
+</section>
+{% endblock fos_user_content %}
