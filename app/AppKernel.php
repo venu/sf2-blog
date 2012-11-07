@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Venu\ApiBundle\VenuApiBundle(),
             new Venu\BlogBundle\VenuBlogBundle(),
             new Venu\AdminBundle\VenuAdminBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

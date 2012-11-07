@@ -124,3 +124,13 @@ nelmio_api_doc:
     sandbox:
         #endpoint: http://localhost/riktamBlog/web/app_dev.php
 
+stfalcon_tinymce:
+        include_jquery: false
+        tinymce_jquery: true
+        textarea_class: "tinymce"
+        language: %locale%
+        theme:
+            simple:
+                mode: "textareas"
+                theme: "advanced"
+

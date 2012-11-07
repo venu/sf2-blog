@@ -10,7 +10,12 @@ class BlogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title')
-                ->add('blog', "textarea", array('required' => false))
+                ->add('blog', "textarea",  array(
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'data-theme' => 'simple' // simple, advanced, bbcode
+                    )
+                ))
                 ->add('tags');
     }
 

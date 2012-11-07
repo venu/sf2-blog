@@ -1,0 +1,3 @@
+[submodule "vendor/bundles/Stfalcon/Bundle/TinymceBundle"]
+	path = vendor/bundles/Stfalcon/Bundle/TinymceBundle
+	url = git://github.com/stfalcon/TinymceBundle.git
