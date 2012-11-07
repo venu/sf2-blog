@@ -100,7 +100,7 @@ class SecurityController extends BaseController
      *
      * @param ParamFetcher $paramFetcher Paramfetcher
      *
-     * @RequestParam(name="name", default="", description="Name.")
+     * @RequestParam(name="username", default="", description="username.")
      * @RequestParam(name="email",  default="", description="Email.")
      * @RequestParam(name="password",  default="", description="Plain Password.")
      *
@@ -112,92 +112,19 @@ class SecurityController extends BaseController
         $userManager = $this->container->get('fos_user.user_manager');
 
         $user = $userManager->createUser();
-        $user->setUsername($paramFetcher->get('email'));
+        $user->setUsername($paramFetcher->get('username'));
         $user->setEmail($paramFetcher->get('email'));
         $user->setPlainPassword($paramFetcher->get('password'));
-        $user->setName($paramFetcher->get('name'));
         $user->addRole('ROLE_USER');
         
         //Use validation group 'Registration' THE FOSUserBundle
         $validator = $this->get('validator');        
         $errors = $validator->validate($user, array('Registration'));
         if (count($errors) == 0) {
-            $user->setConfirmationToken($this->_generateRandomString(5));
-            //$user->setConfirmationToken($this->container->get('fos_user.util.token_generator')->generateToken());
-            $userManager->updateUser($user);
-            
-            $this->container->get('router')->getContext()->setHost($this->container->getParameter('website_url'));
-            $this->container->get('router')->getContext()->setBaseUrl('/' . $this->_getCulture());
-            $this->container->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
-            
             $view = FOSView::create($user, 200);
         } else {
             $view = $this->getValidationErrorsView($errors);
         }
-        return $view;
-    }
-    
-   
-     /**
-     * Re-Sends an activation email.
-     *
-     * @return FOSView
-     * @ApiDoc()
-     */
-    public function postPublicUserResendemailAction()
-    {
-        $username = $this->getRequest()->get('email');
-        $user = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
- 
-        if (null === $user) {
-           throw new HttpException(404, "User does not exists");
-        }
-        
-        if ($user->isEnabled()) {
-            throw new HttpException(403,"User has already enabled his account");
-        }
-        
-        $this->container->get('router')->getContext()->setHost($this->container->getParameter('website_url'));
-        $this->container->get('router')->getContext()->setBaseUrl('/' . $this->_getCulture());
-        //$user->setConfirmationToken($this->container->get('fos_user.util.token_generator')->generateToken());
-        $user->setConfirmationToken($this->_generateRandomString(5));
-        $this->container->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
-        $this->container->get('fos_user.user_manager')->updateUser($user);
-        
-        return FOSView::create($user, 200);
-    }
-    
-     /**
-     * Activate an account with confirmation token.
-     *
-     * @param ParamFetcher $paramFetcher Paramfetcher
-     *
-     * @RequestParam(name="token", requirements="[0-9A-Za-z]+", default="", description="Email verification token.")
-     * @return FOSView
-     * @ApiDoc()
-     */
-    public function postPublicUserEmailverifyAction(ParamFetcher $paramFetcher)
-    {
-        $user = $this->container->get('fos_user.user_manager')->findUserByConfirmationToken($paramFetcher->get('token'));
-
-        if (null === $user) {
-            throw new HttpException(404, sprintf('The user with confirmation token "%s" does not exist', $paramFetcher->get('token')));
-        }
-
-        $user->setConfirmationToken(null);
-        $user->setEnabled(true);
-        $user->setLastLogin(new \DateTime());
-
-        $this->container->get('fos_user.user_manager')->updateUser($user);
-        
-        //set response & headers
-        $header = $this->getTokenHeader($user);
-        $view = FOSView::create();
-        $view->setHeader("Authorization", 'WSSE profile="UsernameToken"');
-        $view->setHeader("X-WSSE", $header);
-       
-        $data = array('WSSE' => $header);
-        $view->setStatusCode(200)->setData($data);
         return $view;
     }
     
@@ -226,16 +153,9 @@ class SecurityController extends BaseController
         }
 
         if (null === $user->getConfirmationToken()) {
-            /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
-            //$tokenGenerator = $this->container->get('fos_user.util.token_generator');
-            //$tokenGenerator->generateToken();
             $user->setConfirmationToken($this->_generateRandomString(5));
         }
-        
-        $this->container->get('router')->getContext()->setHost($this->container->getParameter('website_url'));
-        $this->container->get('router')->getContext()->setBaseUrl('/' . $this->_getCulture());
-            
-        $this->container->get('fos_user.mailer')->sendResettingEmailMessage($user);
+   
         $user->setPasswordRequestedAt(new \DateTime());
         $this->container->get('fos_user.user_manager')->updateUser($user);
         

@@ -15,16 +15,21 @@ VenuBlogBundle:
     
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/doc
+    prefix:   /apidoc
     
-pictureplix_api_public:
+venu_api_public:
     resource: Venu\ApiBundle\Controller\SecurityController
     type: rest
 
-pictureplix_api:
-    resource: "@VenuApiBundle/Resources/config/routing.yml"
-    type: rest
+venu_api_posts:
+    resource: Venu\ApiBundle\Controller\BlogController
     prefix: /api
+    type: rest
+
+#venu_api:
+#    resource: "@VenuApiBundle/Resources/config/routing.yml"
+#    type: rest
+#    prefix: /api
     
     
     

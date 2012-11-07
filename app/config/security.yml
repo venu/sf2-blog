@@ -17,7 +17,7 @@ security:
             anonymous:    true
 
         wsse_secured:
-            pattern:   ^/api/(?!token|public|resend|doc).*
+            pattern:   ^/api/(?!token|public|resend|doc|blog\/create).*
             stateless:    true
             wsse:
                 nonce_dir: null
