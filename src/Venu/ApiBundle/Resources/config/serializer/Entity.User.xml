@@ -1,0 +1,10 @@
+<serializer>
+    <class name="Venu\ApiBundle\Entity\User" exclusion-policy="all">
+        <property name="id" type="string" expose="true" read-only="true"></property>
+        <property name="name" type="string" expose="true" access-type="public_method"></property>
+        <property name="email" type="string" expose="true" access-type="public_method"></property>
+        <property name="dob" type="date" expose="true" access-type="public_method"></property>
+        <property name="gender" type="string" expose="true" access-type="public_method"></property>
+        <property name="location" type="string" expose="true" access-type="public_method"></property>
+    </class>
+</serializer>

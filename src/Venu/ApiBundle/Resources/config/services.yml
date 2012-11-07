@@ -1,0 +1,8 @@
+parameters:
+
+services:
+    venu_api.registration.form.type:
+        class: Venu\ApiBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: venu_api_registration }

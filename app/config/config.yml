@@ -1,0 +1,161 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: @VenuBlogBundle/Resources/config/config.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: %kernel.debug%
+    form:            true
+    csrf_protection: false
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  %locale%
+    trust_proxy_headers: false # Should Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
+    session:         ~
+    session:
+        handler_id:     session.handler.pdo
+        
+parameters:
+   pdo.db_options:
+        db_table:    session
+        db_id_col:   session_id
+        db_data_col: session_value
+        db_time_col: session_time
+
+services:
+    pdo:
+        class: PDO
+        arguments:
+            - "mysql:dbname=%database_name%"
+            - %database_user%
+            - %database_password%
+            
+    session.handler.pdo:
+        class:     'Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler'
+        arguments: [@pdo, %pdo.db_options%]
+     
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ VenuApiBundle, VenuBlogBundle]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        yui_css:
+            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+      
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+
+jms_security_extra:
+    secure_all_services: false
+    enable_iddqd_attribute: false
+    expressions: true
+
+jms_serializer:
+    #handlers:
+    #    object_based: true
+    metadata:
+        #auto_detection: true
+        directories:
+            FOSUserBundle:
+                namespace_prefix: "FOS\\UserBundle"
+                path: "@VenuApiBundle/Resources/config/serializer/fos"
+            VenuApiBundle:
+                namespace_prefix: "Venu\\ApiBundle"
+                path: "@VenuApiBundle/Resources/config/serializer"
+
+sensio_framework_extra:
+    router:  { annotations: true }
+    request: { converters: true }
+    view:    { annotations: false }  # More info at https://github.com/FriendsOfSymfony/FOSRestBundle/issues/95
+    cache:   { annotations: true }
+
+jms_aop:
+    cache_dir: %kernel.cache_dir%/jms_aop
+
+fos_user:
+    db_driver: orm
+    firewall_name: wsse_secured #fos_secured
+    user_class: Venu\ApiBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+            address:        noreply@riktam.de
+            sender_name:    Riktam
+    registration:
+        form:
+            type: venu_api_registration
+        confirmation: 
+            enabled: true
+            template: VenuApiBundle:Register:email.html.twig
+    resetting:
+        email:
+            template: VenuApiBundle:Resetting:email.html.twig
+        
+fos_rest:
+    view:
+        view_response_listener: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: php
+        formats:
+            json: true
+            xml: true
+            rss: false
+    format_listener:
+        prefer_extension: true
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json
+    param_fetcher_listener: true
+    allowed_methods_listener: true
+    exception:
+        messages:
+            #'Venu\ApiBundle\Exception\AccessDeniedException': true
+            'Venu\ApiBundle\Exception\HttpException': true
+            'Venu\ApiBundle\Exception\NotFoundHttpException': true
+            
+
+mopa_wsse_authentication:
+    provider_class: Mopa\Bundle\WSSEAuthenticationBundle\Security\Authentication\Provider\WsseAuthenticationProvider
+    listener_class: Mopa\Bundle\WSSEAuthenticationBundle\Security\Firewall\WsseListener
+    factory_class: Mopa\Bundle\WSSEAuthenticationBundle\Security\Factory\WsseFactory
+
+nelmio_api_doc:
+    sandbox:
+        #endpoint: http://localhost/riktamBlog/web/app_dev.php
+

@@ -1,0 +1,11 @@
+<?php
+
+namespace Venu\ApiBundle\Exception;
+
+use \Symfony\Component\HttpKernel\Exception\AccessDeniedException as Exception;
+
+class AccessDeniedException extends Exception{
+    
+    
+}
+?>

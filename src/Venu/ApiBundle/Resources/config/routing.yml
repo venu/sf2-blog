@@ -1,0 +1,14 @@
+pictureplix_api_users:
+    resource: Venu\ApiBundle\Controller\UsersController
+    type: rest
+
+
+    
+pictureplix_api_likes:
+    resource: Venu\ApiBundle\Controller\LikesController
+    type: rest
+    
+pictureplix_api_comments:
+    resource: Venu\ApiBundle\Controller\CommentsController
+    type: rest
+    

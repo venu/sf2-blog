@@ -1,0 +1,25 @@
+VenuBlogBundle_homepage:
+    pattern:  /
+    defaults: { _controller: VenuBlogBundle:Page:index }
+    requirements:
+        _method:  GET
+        
+VenuBlogBundle_about:
+    pattern:  /about
+    defaults: { _controller: VenuBlogBundle:Page:about }
+    requirements:
+        _method:  GET
+        
+VenuBlogBundle_blog_show:
+    pattern:  /{id}/{slug}
+    defaults: { _controller: VenuBlogBundle:Blog:show }
+    requirements:
+        _method:  GET
+        id: \d+
+
+VenuBlogBundle_comment_create:
+    pattern:  /comment/{blog_id}
+    defaults: { _controller: VenuBlogBundle:Comment:create }
+    requirements:
+        _method:  POST
+        id: \d+

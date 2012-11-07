@@ -1,0 +1,25 @@
+{% extends 'VenuBlogBundle::base.html.twig' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block body %}
+    <article class="blog">
+        <header>
+            <div class="date"><time datetime="{{ blog.createdAt|date('c') }}">{{ blog.createdAt|date('l, F j, Y') }}</time></div>
+            <h2>{{ blog.title }}</h2>
+        </header>
+        <div>
+            <p>{{ blog.blog }}</p>
+        </div>
+    </article>
+    
+    <section class="comments" id="comments">
+        <section class="previous-comments">
+            <h3>Comments</h3>
+            {% include 'VenuBlogBundle:Comment:index.html.twig' with { 'comments': comments } %}
+        </section>
+        
+        <h3>Add Comment</h3>
+        {% render 'VenuBlogBundle:Comment:new' with { 'blog_id': blog.id } %}
+    </section>
+{% endblock %}

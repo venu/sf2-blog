@@ -1,0 +1,5 @@
+parameters:
+    # Blogger contact email address
+    venu_blog.emails.contact_email: venu@riktamtech.com
+    # Blogger max latest comments
+    venu_blog.comments.latest_comment_limit: 10

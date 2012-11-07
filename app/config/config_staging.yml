@@ -1,0 +1,27 @@
+imports:
+    - { resource: config.yml }
+    - { resource: parameters_staging.yml }
+
+framework:
+    router:   { resource: "%kernel.root_dir%/config/routing.yml" }
+    profiler: { only_exceptions: false }
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %kernel.logs_dir%/%kernel.environment%.log
+            level: debug
+        firephp:
+            type:  firephp
+            level: info
+
+assetic:
+    use_controller: true
+
+
+nelmio_api_doc:
+    name:   Riktam Blog
+    
+#swiftmailer:
+#    delivery_address: me@example.com
