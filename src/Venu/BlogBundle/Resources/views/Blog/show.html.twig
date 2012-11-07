@@ -12,6 +12,15 @@
             <p>{{ blog.blog | striptags('<p>,<br>,<strong>,<u>,<i>, <style>, <em>') | raw}}</p>
         </div>
     </article>
+
+    <section class="likes" id="likes">
+      {% if isLiked %}
+      <i class="icon-thumbs-up"></i>You Liked
+      <a href="{{ path('VenuBlogBundle_blog_dislike', { 'id': blog.id}) }}" class="btn"><i class="icon-thumbs-down"></i> Dislike</a>
+      {% else %}
+      <a href="{{ path('VenuBlogBundle_blog_like', { 'id': blog.id}) }}" class="btn"><i class="icon-thumbs-up"></i>Like</a>
+      {% endif  %}
+    </section>
     
     <section class="comments" id="comments">
         <section class="previous-comments">

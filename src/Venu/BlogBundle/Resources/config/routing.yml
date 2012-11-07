@@ -23,3 +23,17 @@ VenuBlogBundle_comment_create:
     requirements:
         _method:  POST
         id: \d+
+        
+VenuBlogBundle_blog_like:
+    pattern:  /like/add/{id}
+    defaults: { _controller: VenuBlogBundle:Like:add }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+
+VenuBlogBundle_blog_dislike:
+    pattern:  /like/delete/{id}
+    defaults: { _controller: VenuBlogBundle:Like:delete }
+    requirements:
+        _method:  GET
+        id: \d+

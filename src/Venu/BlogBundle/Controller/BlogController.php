@@ -17,7 +17,6 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $blog = $em->getRepository('VenuApiBundle:Blog')->find($id);
-
         if (!$blog) {
             throw $this->createNotFoundException('Unable to find Blog post.');
         }
@@ -25,9 +24,18 @@ class BlogController extends Controller
         $comments = $em->getRepository('VenuApiBundle:Comment')
                        ->getCommentsForBlog($blog->getId());
         
+        $likes = $em->getRepository('VenuApiBundle:Likes')
+                       ->getLikesCount($blog->getId());
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        $isLiked = $em->getRepository('VenuApiBundle:Likes')
+                       ->isLiked($user->getId(), $blog->getId());
+        
         return $this->render('VenuBlogBundle:Blog:show.html.twig', array(
             'blog'      => $blog,
-            'comments'  => $comments
+            'comments'  => $comments,
+            'likes'  => $likes,
+            'isLiked' => $isLiked
         ));
     }
 }

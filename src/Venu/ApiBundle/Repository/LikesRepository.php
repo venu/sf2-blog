@@ -22,6 +22,17 @@ class LikesRepository extends EntityRepository
         return  $query->getQuery()->getSingleScalarResult();
     }
     
+    public function isLiked($user, $blog) {
+        $query = $this->createQueryBuilder('u')
+                ->select('u.id')
+                ->add('where', 'u.blog = ?1');
+               $query->andWhere('u.user = ?2')
+               ->setParameter(1, $blog)
+                ->setParameter(2, $user);
+        
+        return  $query->getQuery()->getResult();
+    }
+    
     //get Users likes
     public function getLikes($blog, $offset=0, $limit=20)
     {
@@ -37,7 +48,7 @@ class LikesRepository extends EntityRepository
             $qb->add('orderBy', 'c.id asc');
             
             $qb->add('where','c.blog = ?1')
-               ->setParameter(1, $designPageId);
+               ->setParameter(1, $blog);
         
             //Get our query
             $q = $qb->getQuery();
