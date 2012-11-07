@@ -1,1 +1,77 @@
-Hello {{ name }}!
+{% extends 'VenuAdminBundle::base.html.twig' %}
+
+{% block body %}
+       
+    <div class="modal hide fade" id="myModal">
+        <div class="modal-header">
+            <button type="button" class="close orderRejectCloseButton">×</button>
+            <h3>Delete Blog Post</h3>
+        </div>
+        <div class="modal-body">
+            <p>If you continue, this post won´t be available to the user anymore.</p>
+        </div>
+        <div class="modal-footer">
+            <a class="btn orderRejectCloseButton">Close</a>
+            <a id="orderRejectContinue" class="btn btn-primary">Continue</a>
+        </div>
+    </div>        
+
+    <div class="page-header">
+        <h1>Posts</h1>
+    </div>
+
+    <table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="header">Title</th>
+            <th class="header">Slug</th>
+            <th class="header">Created At</th>            
+            <th class="header">Comments Count</th>
+            <th class="header">Edit</th>
+            <th class="header">Delete</th>
+        </tr>
+    </thead>
+    <tbody id="ordersSortResult">
+        {% for blog in blogs %}
+        <tr data-id="{{ blog.id }}" data-deleteurl="{{ path('VenuAdminBundle_blog_delete', { 'id': blog.id}) }}">
+        <td><a href="{{ path('VenuBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}</a></td>
+        <td>{{ blog.slug }}</td>
+        <td>{{ blog.createdAt|date('l, F j, Y') }}</td>
+        <td>{{ blog.comments|length}}</td>
+        <td><a href="{{ path('VenuAdminBundle_blog_edit', { 'id': blog.id}) }}" class="btn"><i class="icon-edit"></i> Edit</a></td>
+        <td><a class="btn btn-danger btn-mini"><i class="icon-trash icon-white"></i></a></td>
+        {% else %}
+            <p>There are no blog entries for Riktam Blog</p>
+        {% endfor %}
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $('.btn-danger').live('click', function() { 
+        $('#myModal').modal({
+            toggle: true,
+            backdrop: 'static'
+        });
+        
+        var deleteURl = $(this).closest('tr').data('deleteurl');
+
+        $('a#orderRejectContinue').bind('click', function() {
+            $(this).unbind('click');
+            $('.orderRejectCloseButton').unbind('click');
+            
+            window.location.href = deleteURl;
+        }); 
+
+        $('.orderRejectCloseButton').bind('click', function() {
+            $(this).unbind('click');
+            $('#orderRejectContinue').unbind('click');
+            $('#myModal').modal('hide');
+        });    
+            
+    });
+  </script>
+{% endblock %}

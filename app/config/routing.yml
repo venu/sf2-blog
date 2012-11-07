@@ -4,10 +4,10 @@ venu_admin:
     type:     annotation
     prefix:   /admin
 
-venu_blog:
-    resource: "@VenuBlogBundle/Controller/"
-    type:     annotation
-    prefix:   /
+VenuAdminBundle:
+    resource: "@VenuAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 
 VenuBlogBundle:
     resource: "@VenuBlogBundle/Resources/config/routing.yml"

@@ -1,0 +1,25 @@
+VenuAdminBundle_homepage:
+    pattern:  /
+    defaults: { _controller: VenuAdminBundle:Default:index }
+    requirements:
+        _method:  GET
+        
+VenuAdminBundle_blog_edit:
+    pattern:  /blog/edit/{id}
+    defaults: { _controller: VenuAdminBundle:Blog:edit }
+    requirements:
+        _method:  GET
+        id: \d+
+
+VenuAdminBundle_blog_delete:
+    pattern:  /blog/delete/{id}
+    defaults: { _controller: VenuAdminBundle:Blog:delete }
+    requirements:
+        _method:  GET
+        id: \d+
+
+VenuAdminBundle_blog_create:
+    pattern:  /blog/create
+    defaults: { _controller: VenuAdminBundle:Blog:create }
+    requirements:
+        _method: GET|POST

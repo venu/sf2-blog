@@ -8,12 +8,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
+    
     /**
      * @Route("/")
      * @Template()
      */
     public function indexAction()
     {
-        return array('name' => 'sss');
+        $em = $this->getDoctrine()
+                   ->getEntityManager();
+
+        $blogs = $em->getRepository('VenuApiBundle:Blog')
+                    ->getLatestBlogs();
+
+        return $this->render('VenuAdminBundle:Default:index.html.twig', array(
+            'blogs' => $blogs
+        ));
     }
 }
