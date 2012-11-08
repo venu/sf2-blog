@@ -66,7 +66,7 @@ class LikeController extends Controller
         
          
          return $this->redirect($this->generateUrl('VenuBlogBundle_blog_show', array(
-                    'id'    => $blog->getId()))
+                    'id'    => $blog->getId(), 'slug'    => $blog->getSlug()))
                 );
     }
 }

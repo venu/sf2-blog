@@ -1,20 +1,15 @@
 Intallation
 ===========
-git clone git@78.47.162.180:ppCommunity.git
+git clone https://github.com/venu/sf2-blog.git
 curl -s http://getcomposer.org/installer | php
 php composer.phar install
 
-Database
-========
+Setup Database
+==============
 php app/console doctrine:migrations:migrate
 php app/console doctrine:fixtures:load --append
 
-
-Documentation
-=============
-Api: http://localhost/riktamBlog/web/app_dev.php/apidoc/
-Admin: http://localhost/riktamBlog/web/app_dev.php/admin/
-
 Testing
-=======
-After installation you will find API documentation and test console in http://localhost/riktamBlog/web/app_dev.php 
+=============
+Api: http://blog.local/apidoc/
+Admin: http://blog.local/admin/

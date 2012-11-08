@@ -79,7 +79,7 @@ class Blog
     }
 
     /**
-     * @ORM\prePersist
+     * @ORM\PrePersist
      */
     public function setCreatedValue()
     {
@@ -88,7 +88,7 @@ class Blog
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function setUpdatedValue()
     {

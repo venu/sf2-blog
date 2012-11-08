@@ -28,8 +28,12 @@ class BlogController extends Controller
                        ->getLikesCount($blog->getId());
         
         $user = $this->get('security.context')->getToken()->getUser();
-        $isLiked = $em->getRepository('VenuApiBundle:Likes')
+        if(is_object($user)){
+         $isLiked = $em->getRepository('VenuApiBundle:Likes')
                        ->isLiked($user->getId(), $blog->getId());
+        }else{
+            $isLiked = 0;
+        }
         
         return $this->render('VenuBlogBundle:Blog:show.html.twig', array(
             'blog'      => $blog,
