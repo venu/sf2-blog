@@ -22,7 +22,7 @@ Features
 
 Intallation
 -----------
-* git clone https://github.com/venu/sf2-blog.git
+* git clone git@github.com:venu/sf2-blog.git
 * curl -s http://getcomposer.org/installer | php
 * php composer.phar install
 
@@ -33,5 +33,6 @@ Setup Database
 
 Testing
 -------
+* Blog: http://blog.local/
 * Api: http://blog.local/apidoc/
 * Admin: http://blog.local/admin/
