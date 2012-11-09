@@ -122,7 +122,7 @@ mopa_wsse_authentication:
 
 nelmio_api_doc:
     sandbox:
-        endpoint: http://localhost/riktamBlog/web/app_dev.php
+        #endpoint: http://localhost/riktamBlog/web/app_dev.php
 
 stfalcon_tinymce:
         include_jquery: false
