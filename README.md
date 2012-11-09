@@ -25,8 +25,9 @@ Intallation
 * git clone git@github.com:venu/sf2-blog.git
 * curl -s http://getcomposer.org/installer | php
 * php composer.phar install
+* Rename app/config/paramters.dist.yml to app/config/paramters.yml
 * Modify app/config/paramters.yml file with your database settings.
-* create virtualhost for blog.local. And that domain in host file.
+* Create virtualhost for blog.local. And that domain in host file.
 
 Setup Database
 --------------
