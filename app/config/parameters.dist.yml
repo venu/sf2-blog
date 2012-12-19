@@ -1,0 +1,15 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     ~
+    database_name:     blog
+    database_user:     blog_user
+    database_password: blog_user_password
+
+    mailer_transport:  smtp
+    mailer_host:       localhost
+    mailer_user:       noreply@blog.com
+    mailer_password:   
+
+    locale:            en
+    secret:            bd6ef9e8153c1a3cab6f0602e25f76f5

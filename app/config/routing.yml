@@ -25,13 +25,6 @@ venu_api_posts:
     resource: Venu\ApiBundle\Controller\BlogController
     prefix: /api
     type: rest
-
-#venu_api:
-#    resource: "@VenuApiBundle/Resources/config/routing.yml"
-#    type: rest
-#    prefix: /api
-    
-    
     
 #fos user bundle
 fos_user_security:

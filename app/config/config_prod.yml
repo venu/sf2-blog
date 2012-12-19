@@ -20,4 +20,4 @@ monolog:
             level: debug
 
 nelmio_api_doc:
-    name:   Riktam Blog
+    name:   Venu Blog

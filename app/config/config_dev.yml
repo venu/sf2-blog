@@ -27,7 +27,7 @@ jms_debugging:
     auto_help: false
 
 nelmio_api_doc:
-    name:   Riktam Blog API (v1)
+    name:   Venu Blog API (v1)
     
 #swiftmailer:
 #    delivery_address: me@example.com
