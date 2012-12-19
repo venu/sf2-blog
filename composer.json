@@ -1,5 +1,6 @@
 {
     "name": "venu/sf2-blog",
+	"type": "application",
     "description": "Simple blog application built on symfony2",
 	"keywords": ["Blog","Symfony","Sf2","symfonyblog"],
     "homepage": "https://github.com/venu/sf2-blog",
