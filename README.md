@@ -1,5 +1,5 @@
-Blog
-====
+Symfony2 Blog Application
+=========================
 This is simple demo of creating blog using symfony2 (2.1) & with some good bundles. 
 
 * FOSUserBundle
