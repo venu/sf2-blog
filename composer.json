@@ -4,6 +4,12 @@
     "description": "Simple blog application built on symfony2",
 	"keywords": ["Blog","Symfony","Sf2","symfonyblog"],
     "homepage": "https://github.com/venu/sf2-blog",
+	"authors": [
+        {
+            "name": "Venu",
+            "homepage": "http://venu-t.tumblr.com/"
+        }
+    ],
     "autoload": {
         "psr-0": {
             "": "src/"
