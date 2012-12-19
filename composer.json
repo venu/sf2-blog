@@ -1,6 +1,8 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "venu/sf2-blog",
+    "description": "Simple blog application built on symfony2",
+	"keywords": ["Blog","Symfony","Sf2","symfonyblog"],
+    "homepage": "https://github.com/venu/sf2-blog",
     "autoload": {
         "psr-0": {
             "": "src/"
