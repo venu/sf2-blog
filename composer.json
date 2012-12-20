@@ -33,7 +33,7 @@
         "gedmo/doctrine-extensions":"2.3.0",
         "stof/doctrine-extensions-bundle":"dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "jms/serializer-bundle": "0.9.*",
+        "jms/serializer-bundle": "1.0.*",
         "jms/debugging-bundle" : "dev-master",
         "friendsofsymfony/user-bundle": "dev-master",
         "friendsofsymfony/rest-bundle": "dev-master",
