@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Sf2-blog : Simple blog application built on symfony2. " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Sf2-blog</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/venu/sf2-blog">View on GitHub</a>
+
+          <h1 id="project_title">Sf2-blog</h1>
+          <h2 id="project_tagline">Simple blog application built on symfony2. </h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/venu/sf2-blog/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/venu/sf2-blog/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Symfony2 Blog Application</h1>
+
+<p>This is simple demo of creating blog using symfony2 (2.1) &amp; with some good bundles. </p>
+
+<ul>
+<li>FOSUserBundle</li>
+<li>FosRestBundle</li>
+<li>NelmioApiDocBundle</li>
+<li>JMSSerializerBundle</li>
+<li>TinymceBundle </li>
+<li>Doctrine Bundles (ORM, fixtures, Migrations etc)</li>
+<li>and some other good bundles</li>
+</ul><h2>Features</h2>
+
+<ul>
+<li>Anonymous/Logged in user can view posts.</li>
+<li>User can register, log-in etc</li>
+<li>User can post comments.</li>
+<li>User can like/dislike posts.</li>
+<li>Admin can login.</li>
+<li>Admin can manage (create/view/edit/delete) posts.</li>
+<li>Admin can manage comments.</li>
+</ul><h2>Intallation</h2>
+
+<ul>
+<li>git clone <a href="mailto:git@github.com">git@github.com</a>:venu/sf2-blog.git</li>
+<li>curl -s <a href="http://getcomposer.org/installer">http://getcomposer.org/installer</a> | php</li>
+<li>php composer.phar install</li>
+<li>Rename app/config/paramters.dist.yml to app/config/paramters.yml</li>
+<li>Modify app/config/paramters.yml file with your database settings.</li>
+<li>Create virtualhost for blog.local. And that domain in host file.</li>
+</ul><h2>Setup Database</h2>
+
+<ul>
+<li>php app/console doctrine:migrations:migrate</li>
+<li>php app/console doctrine:fixtures:load --append</li>
+</ul><h2>Testing</h2>
+
+<ul>
+<li>Blog: <a href="http://blog.local/">http://blog.local/</a>
+</li>
+<li>Api: <a href="http://blog.local/apidoc/">http://blog.local/apidoc/</a>
+</li>
+<li>Admin: <a href="http://blog.local/admin/">http://blog.local/admin/</a>
+</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Sf2-blog maintained by <a href="https://github.com/venu">venu</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
